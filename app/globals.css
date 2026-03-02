@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui;
+  --font-serif: var(--font-serif), ui-serif, Georgia;
+  
+  --color-japandi-bg: #F9F7F2;
+  --color-japandi-ink: #2C2C2C;
+  --color-japandi-sage: #8A9A5B;
+  --color-japandi-terracotta: #C16646;
+  --color-japandi-ochre: #D4A373;
+  --color-japandi-stone: #E5E1D8;
+}
+
+@layer base {
+  body {
+    @apply font-sans;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .japandi-card {
+    @apply bg-white/50 backdrop-blur-sm border border-japandi-stone/50 rounded-2xl p-8 transition-all duration-500 hover:shadow-xl hover:shadow-japandi-ochre/5;
+  }
+
+  .btn-primary {
+    @apply bg-japandi-ink text-japandi-bg px-8 py-4 rounded-full font-sans font-medium tracking-wide transition-all duration-300 hover:bg-japandi-terracotta hover:scale-105 active:scale-95 shadow-lg shadow-japandi-ink/10;
+  }
+
+  .btn-secondary {
+    @apply border border-japandi-ink text-japandi-ink px-8 py-4 rounded-full font-sans font-medium tracking-wide transition-all duration-300 hover:bg-japandi-ink hover:text-japandi-bg;
+  }
+
+  .section-padding {
+    @apply py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Custom scrollbar for Japandi feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-japandi-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-japandi-stone);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-japandi-ochre);
+}
