@@ -91,7 +91,7 @@ export default function LandingPage() {
               className="relative aspect-[4/5] w-full max-w-[500px] lg:max-w-none mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/50"
             >
               <Image
-                src="https://i.imgur.com/u7My6wR.jpeg"
+                src="https://i.imgur.com/U4NvcRG.jpeg"
                 alt="Lorena Cristina Santos"
                 fill
                 className="object-cover object-[center_top]"
