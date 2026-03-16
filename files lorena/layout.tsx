@@ -44,11 +44,9 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${cormorant.variable} ${playfair.variable} ${dmSans.variable} scroll-smooth`}
+      className={`${cormorant.variable} ${playfair.variable} ${dmSans.variable}`}
     >
-      <body className="font-body antialiased bg-cream-50 text-neutral-900 selection:bg-gold-200">
-        {children}
-      </body>
+      <body className="font-body antialiased">{children}</body>
     </html>
   );
 }

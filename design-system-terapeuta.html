@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Terapeuta</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ═══════════════════════════════════════════
+     COLOR PALETTE — Derived from photo
+     Cream suit, gold accents, marble, warmth
+  ═══════════════════════════════════════════ */
+  
+  /* Primary — Warm Cream */
+  --cream-50: #FFFDF8;
+  --cream-100: #FFF9ED;
+  --cream-200: #FFF3DB;
+  --cream-300: #FFE8BF;
+  --cream-400: #F5D8A0;
+  --cream-500: #E6C88A;
+  --cream-600: #C4A66E;
+  
+  /* Accent — Burnished Gold */
+  --gold-50: #FFF8E7;
+  --gold-100: #FFEFC4;
+  --gold-200: #FFE09A;
+  --gold-300: #E6BE6A;
+  --gold-400: #C9A04A;
+  --gold-500: #A8833A;
+  --gold-600: #8B6B2E;
+  --gold-700: #6E5322;
+  
+  /* Neutral — Warm Gray/Brown */
+  --neutral-50: #FAF8F5;
+  --neutral-100: #F2EDE6;
+  --neutral-200: #E5DDD2;
+  --neutral-300: #D1C5B5;
+  --neutral-400: #B3A494;
+  --neutral-500: #8F7E6D;
+  --neutral-600: #6B5D4F;
+  --neutral-700: #4A3F34;
+  --neutral-800: #332B22;
+  --neutral-900: #1E1812;
+  
+  /* Accent 2 — Sage (calm, therapeutic) */
+  --sage-50: #F4F7F2;
+  --sage-100: #E3EBE0;
+  --sage-200: #C8D7C3;
+  --sage-300: #A4B99D;
+  --sage-400: #7D9A74;
+  --sage-500: #5E7B55;
+  --sage-600: #465E3F;
+  
+  /* Accent 3 — Dusty Rose (warmth, empathy) */
+  --rose-50: #FBF3F1;
+  --rose-100: #F5E0DB;
+  --rose-200: #ECCCC4;
+  --rose-300: #D9A99D;
+  --rose-400: #C08878;
+  --rose-500: #A66B5C;
+  --rose-600: #875348;
+  
+  /* Accent 4 — Deep Teal (trust, depth) */
+  --teal-50: #EFF6F5;
+  --teal-100: #D4E8E5;
+  --teal-200: #A8D1CC;
+  --teal-300: #72B3AB;
+  --teal-400: #4A958C;
+  --teal-500: #347A72;
+  --teal-600: #245F58;
+  
+  /* Semantic */
+  --bg-primary: #FFFDF8;
+  --bg-secondary: #FAF8F5;
+  --bg-tertiary: #F2EDE6;
+  --text-primary: #1E1812;
+  --text-secondary: #6B5D4F;
+  --text-tertiary: #8F7E6D;
+  --text-accent: #A8833A;
+  --border-light: #E5DDD2;
+  --border-medium: #D1C5B5;
+  
+  /* Typography */
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-heading: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+  
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(30,24,18,0.04), 0 1px 2px rgba(30,24,18,0.06);
+  --shadow-md: 0 4px 12px rgba(30,24,18,0.06), 0 2px 4px rgba(30,24,18,0.04);
+  --shadow-lg: 0 12px 40px rgba(30,24,18,0.08), 0 4px 12px rgba(30,24,18,0.04);
+  --shadow-xl: 0 24px 60px rgba(30,24,18,0.10), 0 8px 20px rgba(30,24,18,0.06);
+  --shadow-gold: 0 4px 20px rgba(168,131,58,0.15);
+  
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 350ms;
+  --duration-slow: 600ms;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM LAYOUT
+═══════════════════════════════════════════ */
+
+.ds-page {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Hero / Cover */
+.ds-hero {
+  position: relative;
+  padding: 80px 60px 100px;
+  background: linear-gradient(165deg, var(--cream-50) 0%, var(--cream-100) 40%, var(--neutral-100) 100%);
+  overflow: hidden;
+}
+
+.ds-hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(168,131,58,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ds-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
+}
+
+.ds-hero-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  margin-bottom: 24px;
+}
+
+.ds-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--neutral-800);
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.ds-hero h1 em {
+  font-style: italic;
+  color: var(--gold-500);
+}
+
+.ds-hero p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* Section */
+.ds-section {
+  padding: 80px 60px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.ds-section:last-child { border-bottom: none; }
+
+.ds-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.ds-section-number {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gold-400);
+  min-width: 32px;
+}
+
+.ds-section-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--neutral-800);
+  letter-spacing: -0.5px;
+}
+
+.ds-section-subtitle {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-top: 8px;
+  margin-bottom: 48px;
+  padding-left: 48px;
+}
+
+/* ═══════════════════════════════════════════
+   01 — COLOR PALETTE
+═══════════════════════════════════════════ */
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+  padding-left: 48px;
+}
+
+.color-group h3 {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+.color-swatches {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.color-swatch {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.color-swatch:first-child { height: 80px; }
+
+.color-swatch:hover { transform: scaleX(1.02); }
+
+.color-swatch .name { opacity: 0.85; }
+.color-swatch .hex { opacity: 0.6; font-family: var(--font-body); font-size: 12px; font-weight: 400; letter-spacing: 0.5px; }
+
+/* ═══════════════════════════════════════════
+   02 — TYPOGRAPHY
+═══════════════════════════════════════════ */
+
+.type-showcase {
+  padding-left: 48px;
+}
+
+.type-specimen {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.type-specimen:last-child { border-bottom: none; }
+
+.type-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.type-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  background: var(--gold-50);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gold-200);
+}
+
+.type-info {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+.type-display {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--neutral-800);
+  margin-bottom: 8px;
+  letter-spacing: -1.5px;
+}
+
+.type-display em { font-style: italic; color: var(--gold-500); }
+
+.type-heading {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--neutral-800);
+  letter-spacing: -0.5px;
+}
+
+.type-subheading {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--neutral-700);
+}
+
+.type-body-lg {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 680px;
+}
+
+.type-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+.type-caption {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  letter-spacing: 0.3px;
+}
+
+.type-overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+/* ═══════════════════════════════════════════
+   03 — BUTTONS
+═══════════════════════════════════════════ */
+
+.button-grid {
+  padding-left: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.button-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.button-row-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--duration-fast);
+}
+
+.btn:hover::after { opacity: 1; }
+
+/* Primary */
+.btn-primary {
+  background: var(--neutral-800);
+  color: var(--cream-100);
+  padding: 16px 40px;
+  font-size: 14px;
+  border-radius: var(--radius-full);
+}
+
+.btn-primary::after {
+  background: linear-gradient(135deg, rgba(168,131,58,0.2), transparent);
+}
+
+.btn-primary:hover {
+  background: var(--neutral-900);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Secondary */
+.btn-secondary {
+  background: transparent;
+  color: var(--neutral-800);
+  padding: 15px 38px;
+  font-size: 14px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--neutral-800);
+}
+
+.btn-secondary:hover {
+  background: var(--neutral-800);
+  color: var(--cream-100);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Gold */
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  color: #fff;
+  padding: 16px 40px;
+  font-size: 14px;
+  border-radius: var(--radius-full);
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+/* Ghost */
+.btn-ghost {
+  background: transparent;
+  color: var(--gold-500);
+  padding: 14px 32px;
+  font-size: 14px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--gold-300);
+}
+
+.btn-ghost:hover {
+  background: var(--gold-50);
+  border-color: var(--gold-400);
+}
+
+/* Text Link */
+.btn-text {
+  background: none;
+  color: var(--gold-500);
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-bottom: 1px solid transparent;
+}
+
+.btn-text:hover {
+  border-bottom-color: var(--gold-400);
+}
+
+.btn-text .arrow {
+  display: inline-block;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.btn-text:hover .arrow { transform: translateX(6px); }
+
+/* Small */
+.btn-sm {
+  padding: 10px 24px;
+  font-size: 13px;
+}
+
+/* Large */
+.btn-lg {
+  padding: 20px 52px;
+  font-size: 15px;
+}
+
+/* ═══════════════════════════════════════════
+   04 — CARDS
+═══════════════════════════════════════════ */
+
+.cards-grid {
+  padding-left: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  transition: all var(--duration-normal) var(--ease-out);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--gold-200);
+}
+
+.card-image {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-body {
+  padding: 28px;
+}
+
+.card-overline {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  margin-bottom: 10px;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--neutral-800);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+.card-footer {
+  padding: 0 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Card Variants */
+.card-feature {
+  background: linear-gradient(160deg, var(--cream-50), var(--neutral-50));
+  padding: 40px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--cream-300);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.card-feature:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.card-feature h3 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--neutral-800);
+  margin-bottom: 12px;
+}
+
+.card-feature p {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+
+/* Testimonial Card */
+.card-testimonial {
+  background: var(--neutral-800);
+  color: var(--cream-100);
+  padding: 40px;
+  border-radius: var(--radius-xl);
+  position: relative;
+  border: none;
+}
+
+.card-testimonial:hover {
+  background: var(--neutral-900);
+}
+
+.card-testimonial .quote-mark {
+  font-family: var(--font-display);
+  font-size: 80px;
+  font-weight: 300;
+  color: var(--gold-400);
+  line-height: 1;
+  position: absolute;
+  top: 20px;
+  left: 32px;
+  opacity: 0.4;
+}
+
+.card-testimonial blockquote {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cream-200);
+  margin-bottom: 24px;
+}
+
+.card-testimonial .author {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gold-400);
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════
+   05 — NAVIGATION
+═══════════════════════════════════════════ */
+
+.nav-showcase {
+  padding-left: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.nav-demo {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(255,253,248,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.navbar-dark {
+  background: rgba(30,24,18,0.97);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--neutral-800);
+  letter-spacing: -0.5px;
+}
+
+.nav-logo em {
+  font-style: italic;
+  color: var(--gold-500);
+}
+
+.navbar-dark .nav-logo { color: var(--cream-100); }
+.navbar-dark .nav-logo em { color: var(--gold-300); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold-400);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.nav-links a:hover { color: var(--gold-500); }
+.nav-links a:hover::after { width: 100%; }
+
+.navbar-dark .nav-links a { color: var(--cream-300); }
+.navbar-dark .nav-links a:hover { color: var(--gold-300); }
+
+.nav-cta {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream-100) !important;
+  background: var(--neutral-800);
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.nav-cta:hover {
+  background: var(--neutral-900) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.navbar-dark .nav-cta {
+  background: var(--gold-500);
+  color: #fff !important;
+}
+
+/* ═══════════════════════════════════════════
+   06 — SECTION LAYOUTS
+═══════════════════════════════════════════ */
+
+.layout-showcase {
+  padding-left: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.layout-preview {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+/* Hero Section Preview */
+.preview-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+  background: linear-gradient(165deg, var(--cream-50) 0%, var(--cream-100) 50%, var(--neutral-100) 100%);
+}
+
+.preview-hero-content {
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.preview-hero-overline {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  margin-bottom: 20px;
+}
+
+.preview-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--neutral-800);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.preview-hero-title em {
+  font-style: italic;
+  color: var(--gold-500);
+}
+
+.preview-hero-text {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 420px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.preview-hero-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-hero-image .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--cream-50) 0%, transparent 30%);
+}
+
+/* About Section Preview */
+.preview-about {
+  display: grid;
+  grid-template-columns: 0.45fr 0.55fr;
+  min-height: 460px;
+  background: var(--neutral-800);
+  color: var(--cream-100);
+}
+
+.preview-about-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-about-image .img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--neutral-700), var(--neutral-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-about-content {
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.preview-about-content .overline {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin-bottom: 20px;
+}
+
+.preview-about-content h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--cream-100);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.preview-about-content p {
+  font-size: 15px;
+  color: var(--cream-300);
+  line-height: 1.7;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+/* Services Grid Preview */
+.preview-services {
+  background: var(--neutral-50);
+  padding: 60px 48px;
+}
+
+.preview-services .section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.preview-services .section-header .overline {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  margin-bottom: 12px;
+}
+
+.preview-services .section-header h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--neutral-800);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  background: #fff;
+  padding: 36px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  transition: all var(--duration-normal) var(--ease-out);
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold-200);
+}
+
+.service-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 22px;
+}
+
+.service-card h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--neutral-800);
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   07 — DECORATIVE ELEMENTS
+═══════════════════════════════════════════ */
+
+.decorative-showcase {
+  padding-left: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.deco-item {
+  padding: 48px 32px;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+}
+
+.deco-label {
+  position: absolute;
+  bottom: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* Marble texture */
+.deco-marble {
+  background: linear-gradient(135deg, #fff 0%, #f8f5ef 25%, #fff 50%, #f2ede6 75%, #fff 100%);
+  border: 1px solid var(--border-light);
+}
+
+.deco-marble::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(45deg, transparent 40%, rgba(210,200,185,0.15) 50%, transparent 60%),
+    linear-gradient(135deg, transparent 30%, rgba(200,190,170,0.1) 50%, transparent 70%);
+}
+
+/* Gold Gradient */
+.deco-gold {
+  background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-300) 40%, var(--gold-500) 100%);
+  border: none;
+}
+
+.deco-gold .deco-label { color: rgba(255,255,255,0.7); }
+
+/* Dark Elegance */
+.deco-dark {
+  background: var(--neutral-900);
+  border: 1px solid rgba(168,131,58,0.2);
+}
+
+.deco-dark::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(168,131,58,0.08) 0%, transparent 60%);
+}
+
+.deco-dark .deco-label { color: var(--gold-400); opacity: 0.6; }
+
+/* Organic Wave */
+.deco-wave {
+  background: var(--sage-50);
+  border: 1px solid var(--sage-200);
+}
+
+/* Line Pattern */
+.deco-lines {
+  background: var(--cream-50);
+  border: 1px solid var(--cream-300);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 12px,
+    rgba(168,131,58,0.04) 12px,
+    rgba(168,131,58,0.04) 13px
+  );
+}
+
+/* Dot Pattern */
+.deco-dots {
+  background: var(--neutral-50);
+  border: 1px solid var(--border-light);
+  background-image: radial-gradient(circle, var(--neutral-300) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ═══════════════════════════════════════════
+   08 — SPACING & GRID
+═══════════════════════════════════════════ */
+
+.spacing-showcase {
+  padding-left: 48px;
+}
+
+.spacing-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.spacing-bar {
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--gold-200), var(--gold-300));
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.spacing-bar:hover { transform: scaleX(1.05); }
+
+.spacing-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 80px;
+}
+
+.spacing-value {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--font-body);
+}
+
+/* ═══════════════════════════════════════════
+   09 — FORMS
+═══════════════════════════════════════════ */
+
+.form-showcase {
+  padding-left: 48px;
+  max-width: 560px;
+}
+
+.form-group {
+  margin-bottom: 28px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  background: #fff;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast);
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--gold-400);
+  box-shadow: 0 0 0 3px rgba(168,131,58,0.1);
+}
+
+.form-input::placeholder {
+  color: var(--text-tertiary);
+  font-weight: 300;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238F7E6D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+
+/* ═══════════════════════════════════════════
+   10 — DIVIDERS & ORNAMENTS
+═══════════════════════════════════════════ */
+
+.divider-showcase {
+  padding-left: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.divider-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.divider-simple {
+  width: 100%;
+  height: 1px;
+  background: var(--border-light);
+}
+
+.divider-gold {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
+}
+
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.divider-ornament .line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-light);
+}
+
+.divider-ornament .diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--gold-400);
+  transform: rotate(45deg);
+}
+
+.divider-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ═══════════════════════════════════════════
+   11 — FOOTER PREVIEW
+═══════════════════════════════════════════ */
+
+.footer-preview {
+  background: var(--neutral-900);
+  padding: 60px 48px 40px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--cream-100);
+  margin-bottom: 12px;
+}
+
+.footer-brand .logo em { font-style: italic; color: var(--gold-400); }
+
+.footer-brand p {
+  font-size: 14px;
+  color: var(--cream-400);
+  opacity: 0.5;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin-bottom: 20px;
+}
+
+.footer-col ul { list-style: none; }
+
+.footer-col li {
+  margin-bottom: 10px;
+}
+
+.footer-col a {
+  font-size: 14px;
+  color: var(--cream-300);
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity var(--duration-fast);
+}
+
+.footer-col a:hover { opacity: 1; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom span {
+  font-size: 12px;
+  color: var(--cream-400);
+  opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ds-section { animation: fadeInUp 0.6s var(--ease-out) both; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ds-hero { padding: 48px 28px 60px; }
+  .ds-section { padding: 48px 28px; }
+  .color-grid { padding-left: 0; }
+  .type-showcase, .button-grid, .nav-showcase, .layout-showcase, 
+  .decorative-showcase, .spacing-showcase, .form-showcase, .divider-showcase,
+  .cards-grid { padding-left: 0; }
+  .preview-hero, .preview-about { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="ds-page">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="ds-hero">
+    <div class="ds-hero-label">Design System</div>
+    <h1>Psicologia &<br><em>Elegância</em></h1>
+    <p>Sistema visual completo para landing page de terapia — inspirado em tons de creme, dourado, mármore e sofisticação.</p>
+  </div>
+
+  <!-- ═══ 01 — CORES ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">01</span>
+      <h2 class="ds-section-title">Paleta de Cores</h2>
+    </div>
+    <p class="ds-section-subtitle">Derivada da fotografia — tons cremosos, dourados e neutros quentes com acentos terapêuticos.</p>
+
+    <div class="color-grid">
+      <div class="color-group">
+        <h3>Creme — Primária</h3>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background:#FFFDF8;color:#4A3F34"><span class="name">Cream 50</span><span class="hex">#FFFDF8</span></div>
+          <div class="color-swatch" style="background:#FFF9ED;color:#4A3F34"><span class="name">Cream 100</span><span class="hex">#FFF9ED</span></div>
+          <div class="color-swatch" style="background:#FFF3DB;color:#4A3F34"><span class="name">Cream 200</span><span class="hex">#FFF3DB</span></div>
+          <div class="color-swatch" style="background:#FFE8BF;color:#4A3F34"><span class="name">Cream 300</span><span class="hex">#FFE8BF</span></div>
+          <div class="color-swatch" style="background:#F5D8A0;color:#332B22"><span class="name">Cream 400</span><span class="hex">#F5D8A0</span></div>
+          <div class="color-swatch" style="background:#E6C88A;color:#332B22"><span class="name">Cream 500</span><span class="hex">#E6C88A</span></div>
+          <div class="color-swatch" style="background:#C4A66E;color:#fff"><span class="name">Cream 600</span><span class="hex">#C4A66E</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h3>Dourado — Accent</h3>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background:#FFF8E7;color:#6E5322"><span class="name">Gold 50</span><span class="hex">#FFF8E7</span></div>
+          <div class="color-swatch" style="background:#FFEFC4;color:#6E5322"><span class="name">Gold 100</span><span class="hex">#FFEFC4</span></div>
+          <div class="color-swatch" style="background:#FFE09A;color:#6E5322"><span class="name">Gold 200</span><span class="hex">#FFE09A</span></div>
+          <div class="color-swatch" style="background:#E6BE6A;color:#332B22"><span class="name">Gold 300</span><span class="hex">#E6BE6A</span></div>
+          <div class="color-swatch" style="background:#C9A04A;color:#fff"><span class="name">Gold 400</span><span class="hex">#C9A04A</span></div>
+          <div class="color-swatch" style="background:#A8833A;color:#fff"><span class="name">Gold 500</span><span class="hex">#A8833A</span></div>
+          <div class="color-swatch" style="background:#8B6B2E;color:#fff"><span class="name">Gold 600</span><span class="hex">#8B6B2E</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h3>Neutro Quente</h3>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background:#FAF8F5;color:#4A3F34"><span class="name">Neutral 50</span><span class="hex">#FAF8F5</span></div>
+          <div class="color-swatch" style="background:#F2EDE6;color:#4A3F34"><span class="name">Neutral 100</span><span class="hex">#F2EDE6</span></div>
+          <div class="color-swatch" style="background:#E5DDD2;color:#4A3F34"><span class="name">Neutral 200</span><span class="hex">#E5DDD2</span></div>
+          <div class="color-swatch" style="background:#B3A494;color:#fff"><span class="name">Neutral 400</span><span class="hex">#B3A494</span></div>
+          <div class="color-swatch" style="background:#6B5D4F;color:#fff"><span class="name">Neutral 600</span><span class="hex">#6B5D4F</span></div>
+          <div class="color-swatch" style="background:#332B22;color:#fff"><span class="name">Neutral 800</span><span class="hex">#332B22</span></div>
+          <div class="color-swatch" style="background:#1E1812;color:#fff"><span class="name">Neutral 900</span><span class="hex">#1E1812</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h3>Sage — Terapêutico</h3>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background:#F4F7F2;color:#465E3F"><span class="name">Sage 50</span><span class="hex">#F4F7F2</span></div>
+          <div class="color-swatch" style="background:#E3EBE0;color:#465E3F"><span class="name">Sage 100</span><span class="hex">#E3EBE0</span></div>
+          <div class="color-swatch" style="background:#C8D7C3;color:#465E3F"><span class="name">Sage 200</span><span class="hex">#C8D7C3</span></div>
+          <div class="color-swatch" style="background:#A4B99D;color:#332B22"><span class="name">Sage 300</span><span class="hex">#A4B99D</span></div>
+          <div class="color-swatch" style="background:#7D9A74;color:#fff"><span class="name">Sage 400</span><span class="hex">#7D9A74</span></div>
+          <div class="color-swatch" style="background:#5E7B55;color:#fff"><span class="name">Sage 500</span><span class="hex">#5E7B55</span></div>
+          <div class="color-swatch" style="background:#465E3F;color:#fff"><span class="name">Sage 600</span><span class="hex">#465E3F</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h3>Rosé — Empatia</h3>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background:#FBF3F1;color:#875348"><span class="name">Rose 50</span><span class="hex">#FBF3F1</span></div>
+          <div class="color-swatch" style="background:#F5E0DB;color:#875348"><span class="name">Rose 100</span><span class="hex">#F5E0DB</span></div>
+          <div class="color-swatch" style="background:#ECCCC4;color:#875348"><span class="name">Rose 200</span><span class="hex">#ECCCC4</span></div>
+          <div class="color-swatch" style="background:#D9A99D;color:#332B22"><span class="name">Rose 300</span><span class="hex">#D9A99D</span></div>
+          <div class="color-swatch" style="background:#C08878;color:#fff"><span class="name">Rose 400</span><span class="hex">#C08878</span></div>
+          <div class="color-swatch" style="background:#A66B5C;color:#fff"><span class="name">Rose 500</span><span class="hex">#A66B5C</span></div>
+          <div class="color-swatch" style="background:#875348;color:#fff"><span class="name">Rose 600</span><span class="hex">#875348</span></div>
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h3>Teal — Confiança</h3>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background:#EFF6F5;color:#245F58"><span class="name">Teal 50</span><span class="hex">#EFF6F5</span></div>
+          <div class="color-swatch" style="background:#D4E8E5;color:#245F58"><span class="name">Teal 100</span><span class="hex">#D4E8E5</span></div>
+          <div class="color-swatch" style="background:#A8D1CC;color:#245F58"><span class="name">Teal 200</span><span class="hex">#A8D1CC</span></div>
+          <div class="color-swatch" style="background:#72B3AB;color:#fff"><span class="name">Teal 300</span><span class="hex">#72B3AB</span></div>
+          <div class="color-swatch" style="background:#4A958C;color:#fff"><span class="name">Teal 400</span><span class="hex">#4A958C</span></div>
+          <div class="color-swatch" style="background:#347A72;color:#fff"><span class="name">Teal 500</span><span class="hex">#347A72</span></div>
+          <div class="color-swatch" style="background:#245F58;color:#fff"><span class="name">Teal 600</span><span class="hex">#245F58</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 — TIPOGRAFIA ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">02</span>
+      <h2 class="ds-section-title">Tipografia</h2>
+    </div>
+    <p class="ds-section-subtitle">Cormorant Garamond para títulos display, Playfair Display para headings, DM Sans para corpo.</p>
+
+    <div class="type-showcase">
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Display</span>
+          <span class="type-info">Cormorant Garamond Light — 72px / 1.05</span>
+        </div>
+        <div class="type-display">Cuide da sua <em>mente</em></div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Heading 1</span>
+          <span class="type-info">Playfair Display Medium — 42px / 1.2</span>
+        </div>
+        <div class="type-heading">Transformação Interior</div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Heading 2</span>
+          <span class="type-info">Playfair Display Regular — 28px / 1.3</span>
+        </div>
+        <div class="type-subheading">Terapia com acolhimento</div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Body Large</span>
+          <span class="type-info">DM Sans Light — 20px / 1.7</span>
+        </div>
+        <div class="type-body-lg">Cada sessão é um passo em direção ao autoconhecimento profundo e à construção de uma vida mais plena e significativa.</div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Body</span>
+          <span class="type-info">DM Sans Regular — 16px / 1.7</span>
+        </div>
+        <div class="type-body">A psicoterapia é uma jornada de autodescoberta, onde cada encontro terapêutico oferece um espaço seguro e acolhedor para explorar seus sentimentos, pensamentos e comportamentos.</div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Caption</span>
+          <span class="type-info">DM Sans Regular — 13px / 1.5</span>
+        </div>
+        <div class="type-caption">CRP 08/XXXXX — Atendimento presencial e online</div>
+      </div>
+
+      <div class="type-specimen">
+        <div class="type-meta">
+          <span class="type-tag">Overline</span>
+          <span class="type-info">DM Sans SemiBold — 11px / 3px tracking</span>
+        </div>
+        <div class="type-overline">Psicóloga Clínica</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 03 — BOTÕES ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">03</span>
+      <h2 class="ds-section-title">Botões</h2>
+    </div>
+    <p class="ds-section-subtitle">Cantos arredondados pill, transições suaves, hierarquia visual clara.</p>
+
+    <div class="button-grid">
+      <div>
+        <div class="button-row-label">Primários</div>
+        <div class="button-row">
+          <button class="btn btn-primary btn-lg">Agendar Sessão</button>
+          <button class="btn btn-primary">Agendar Sessão</button>
+          <button class="btn btn-primary btn-sm">Agendar</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="button-row-label">Secundário</div>
+        <div class="button-row">
+          <button class="btn btn-secondary">Saiba Mais</button>
+          <button class="btn btn-secondary btn-sm">Saiba Mais</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="button-row-label">Gold Accent</div>
+        <div class="button-row">
+          <button class="btn btn-gold">Primeira Consulta</button>
+          <button class="btn btn-gold btn-sm">Contato</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="button-row-label">Ghost & Text</div>
+        <div class="button-row">
+          <button class="btn btn-ghost">Sobre Mim</button>
+          <button class="btn btn-text">Ver abordagens <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 04 — CARDS ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">04</span>
+      <h2 class="ds-section-title">Cards</h2>
+    </div>
+    <p class="ds-section-subtitle">Componentes de conteúdo — feature, serviço e depoimento.</p>
+
+    <div class="cards-grid">
+      <div class="card-feature">
+        <div class="card-feature-icon" style="background: var(--sage-100); color: var(--sage-600);">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Terapia Individual</h3>
+        <p>Espaço seguro para autoconhecimento e crescimento pessoal com atendimento personalizado.</p>
+      </div>
+
+      <div class="card-feature">
+        <div class="card-feature-icon" style="background: var(--rose-100); color: var(--rose-600);">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Terapia de Casal</h3>
+        <p>Mediação profissional para fortalecer a comunicação e reconexão do relacionamento.</p>
+      </div>
+
+      <div class="card-testimonial">
+        <span class="quote-mark">"</span>
+        <blockquote>Encontrei um espaço de acolhimento que transformou completamente minha relação comigo mesma.</blockquote>
+        <span class="author">— Paciente há 2 anos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 05 — NAVEGAÇÃO ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">05</span>
+      <h2 class="ds-section-title">Navegação</h2>
+    </div>
+    <p class="ds-section-subtitle">Duas variantes — light (padrão) e dark — com backdrop blur e transições sutis.</p>
+
+    <div class="nav-showcase">
+      <div class="nav-demo">
+        <nav class="navbar">
+          <div class="nav-logo">Dra. <em>Nome</em></div>
+          <ul class="nav-links">
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Abordagens</a></li>
+            <li><a href="#">Depoimentos</a></li>
+            <li><a href="#" class="nav-cta">Agendar</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="nav-demo">
+        <nav class="navbar navbar-dark">
+          <div class="nav-logo">Dra. <em>Nome</em></div>
+          <ul class="nav-links">
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Abordagens</a></li>
+            <li><a href="#">Depoimentos</a></li>
+            <li><a href="#" class="nav-cta">Agendar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 06 — LAYOUTS ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">06</span>
+      <h2 class="ds-section-title">Layouts de Seção</h2>
+    </div>
+    <p class="ds-section-subtitle">Composições para Hero, Sobre e Serviços com hierarquia visual elegante.</p>
+
+    <div class="layout-showcase">
+      <!-- Hero -->
+      <div class="layout-preview">
+        <div class="preview-hero">
+          <div class="preview-hero-content">
+            <div class="preview-hero-overline">Psicóloga Clínica</div>
+            <h1 class="preview-hero-title">Seu bem-estar começa <em>aqui</em></h1>
+            <p class="preview-hero-text">Espaço terapêutico dedicado ao acolhimento, autoconhecimento e transformação interior.</p>
+            <div class="button-row">
+              <button class="btn btn-primary">Agendar Sessão</button>
+              <button class="btn btn-text">Saiba mais <span class="arrow">→</span></button>
+            </div>
+          </div>
+          <div class="preview-hero-image">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg, var(--cream-200), var(--neutral-200));display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:14px;color:var(--text-tertiary);letter-spacing:2px;text-transform:uppercase;">Foto</span>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="layout-preview">
+        <div class="preview-about">
+          <div class="preview-about-image">
+            <div class="img-placeholder">
+              <span style="font-size:14px;color:var(--cream-400);letter-spacing:2px;text-transform:uppercase;opacity:0.3;">Foto</span>
+            </div>
+          </div>
+          <div class="preview-about-content">
+            <div class="overline">Sobre Mim</div>
+            <h2>Uma jornada de cuidado e <em style="font-style:italic;color:var(--gold-400)">acolhimento</em></h2>
+            <p>Psicóloga clínica com formação em abordagens humanistas, dedicada a oferecer um espaço seguro de escuta qualificada.</p>
+            <p>Acredito que cada pessoa carrega dentro de si os recursos necessários para sua transformação.</p>
+            <div style="margin-top:24px;">
+              <button class="btn btn-ghost" style="color:var(--gold-300);border-color:var(--gold-400);font-size:13px;">Conheça minha trajetória <span style="margin-left:8px">→</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="layout-preview">
+        <div class="preview-services">
+          <div class="section-header">
+            <div class="overline">Especialidades</div>
+            <h2>Como posso te ajudar</h2>
+          </div>
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--sage-100);color:var(--sage-500);">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              </div>
+              <h3>Ansiedade</h3>
+              <p>Técnicas e acolhimento para lidar com crises e preocupações excessivas.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--rose-100);color:var(--rose-500);">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              </div>
+              <h3>Autoestima</h3>
+              <p>Ressignificação de crenças e fortalecimento da relação consigo mesma.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon" style="background:var(--teal-100);color:var(--teal-500);">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <h3>Relacionamentos</h3>
+              <p>Mediação e ferramentas para relações mais saudáveis e autênticas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 07 — TEXTURAS ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">07</span>
+      <h2 class="ds-section-title">Texturas & Backgrounds</h2>
+    </div>
+    <p class="ds-section-subtitle">Superfícies visuais para seções — mármore, dourado, dark, orgânico e padrões sutis.</p>
+
+    <div class="decorative-showcase">
+      <div class="deco-item deco-marble">
+        <span class="deco-label">Mármore</span>
+      </div>
+      <div class="deco-item deco-gold">
+        <span class="deco-label">Gold Gradient</span>
+      </div>
+      <div class="deco-item deco-dark">
+        <span class="deco-label">Dark Elegance</span>
+      </div>
+      <div class="deco-item deco-wave">
+        <svg width="200" height="60" viewBox="0 0 200 60" fill="none" style="opacity:0.3">
+          <path d="M0 30 Q25 10 50 30 T100 30 T150 30 T200 30" stroke="var(--sage-400)" stroke-width="1.5" fill="none"/>
+          <path d="M0 40 Q25 20 50 40 T100 40 T150 40 T200 40" stroke="var(--sage-300)" stroke-width="1" fill="none"/>
+          <path d="M0 50 Q25 30 50 50 T100 50 T150 50 T200 50" stroke="var(--sage-200)" stroke-width="0.75" fill="none"/>
+        </svg>
+        <span class="deco-label">Organic Wave</span>
+      </div>
+      <div class="deco-item deco-lines">
+        <span class="deco-label">Line Pattern</span>
+      </div>
+      <div class="deco-item deco-dots">
+        <span class="deco-label">Dot Grid</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 08 — ESPAÇAMENTO ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">08</span>
+      <h2 class="ds-section-title">Espaçamento</h2>
+    </div>
+    <p class="ds-section-subtitle">Escala de 8px com breathing room generoso para elegância visual.</p>
+
+    <div class="spacing-showcase">
+      <div class="spacing-row"><span class="spacing-label">xs</span><div class="spacing-bar" style="width:4px"></div><span class="spacing-value">4px</span></div>
+      <div class="spacing-row"><span class="spacing-label">sm</span><div class="spacing-bar" style="width:8px"></div><span class="spacing-value">8px</span></div>
+      <div class="spacing-row"><span class="spacing-label">md</span><div class="spacing-bar" style="width:16px"></div><span class="spacing-value">16px</span></div>
+      <div class="spacing-row"><span class="spacing-label">lg</span><div class="spacing-bar" style="width:24px"></div><span class="spacing-value">24px</span></div>
+      <div class="spacing-row"><span class="spacing-label">xl</span><div class="spacing-bar" style="width:32px"></div><span class="spacing-value">32px</span></div>
+      <div class="spacing-row"><span class="spacing-label">2xl</span><div class="spacing-bar" style="width:48px"></div><span class="spacing-value">48px</span></div>
+      <div class="spacing-row"><span class="spacing-label">3xl</span><div class="spacing-bar" style="width:64px"></div><span class="spacing-value">64px</span></div>
+      <div class="spacing-row"><span class="spacing-label">4xl</span><div class="spacing-bar" style="width:96px"></div><span class="spacing-value">96px</span></div>
+      <div class="spacing-row"><span class="spacing-label">5xl</span><div class="spacing-bar" style="width:128px"></div><span class="spacing-value">128px</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ 09 — FORMULÁRIOS ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">09</span>
+      <h2 class="ds-section-title">Formulários</h2>
+    </div>
+    <p class="ds-section-subtitle">Inputs limpos com foco dourado — para agendamento e contato.</p>
+
+    <div class="form-showcase">
+      <div class="form-group">
+        <label class="form-label">Nome completo</label>
+        <input type="text" class="form-input" placeholder="Seu nome">
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Modalidade</label>
+        <select class="form-input form-select">
+          <option disabled selected>Selecione uma opção</option>
+          <option>Terapia Individual</option>
+          <option>Terapia de Casal</option>
+          <option>Orientação Parental</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mensagem</label>
+        <textarea class="form-input form-textarea" placeholder="Conte um pouco sobre o que te traz aqui..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;">Enviar Mensagem</button>
+    </div>
+  </section>
+
+  <!-- ═══ 10 — DIVISORES ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">10</span>
+      <h2 class="ds-section-title">Divisores & Ornamentos</h2>
+    </div>
+    <p class="ds-section-subtitle">Separadores elegantes para transições entre seções.</p>
+
+    <div class="divider-showcase">
+      <div class="divider-item">
+        <span class="divider-label">Simples</span>
+        <div class="divider-simple"></div>
+      </div>
+      <div class="divider-item">
+        <span class="divider-label">Dourado Gradient</span>
+        <div class="divider-gold"></div>
+      </div>
+      <div class="divider-item">
+        <span class="divider-label">Com Ornamento</span>
+        <div class="divider-ornament">
+          <div class="line"></div>
+          <div class="diamond"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="divider-item">
+        <span class="divider-label">Triplo Diamante</span>
+        <div class="divider-ornament">
+          <div class="line"></div>
+          <div class="diamond" style="width:6px;height:6px;"></div>
+          <div class="diamond"></div>
+          <div class="diamond" style="width:6px;height:6px;"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 11 — FOOTER ═══ -->
+  <section class="ds-section">
+    <div class="ds-section-header">
+      <span class="ds-section-number">11</span>
+      <h2 class="ds-section-title">Footer</h2>
+    </div>
+    <p class="ds-section-subtitle">Rodapé elegante dark com hierarquia de informações.</p>
+
+    <div style="padding-left:48px;">
+      <div class="footer-preview">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="logo">Dra. <em>Nome</em></div>
+            <p>Psicóloga clínica — CRP 08/XXXXX. Dedicada ao cuidado da sua saúde mental com acolhimento e profissionalismo.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#">Início</a></li>
+              <li><a href="#">Sobre</a></li>
+              <li><a href="#">Abordagens</a></li>
+              <li><a href="#">Depoimentos</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Atendimento</h4>
+            <ul>
+              <li><a href="#">Terapia Individual</a></li>
+              <li><a href="#">Terapia de Casal</a></li>
+              <li><a href="#">Online</a></li>
+              <li><a href="#">Presencial</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="#">WhatsApp</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">E-mail</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 — Todos os direitos reservados</span>
+          <span>Design System v1.0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

@@ -1,12 +1,13 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
-@config "../tailwind.config.ts";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════
    DESIGN SYSTEM — Terapeuta
    Paleta derivada da fotografia: creme, dourado, mármore
-   Fontes carregadas via next/font no layout.tsx
-   ═══════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 
 @layer base {
   :root {
@@ -86,6 +87,11 @@
     --shadow-xl: 0 24px 60px rgba(30,24,18,0.10), 0 8px 20px rgba(30,24,18,0.06);
     --shadow-gold: 0 4px 20px rgba(168,131,58,0.15);
 
+    /* ─── Tipografia ─── */
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+
     /* ─── Transições ─── */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -94,6 +100,11 @@
     --duration-slow: 600ms;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   BASE STYLES
+═══════════════════════════════════════════════════════ */
 
 @layer base {
   * {
@@ -107,6 +118,7 @@
   }
 
   body {
+    font-family: var(--font-body);
     background-color: var(--bg-primary);
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
@@ -114,16 +126,19 @@
     line-height: 1.6;
   }
 
+  /* Seleção de texto com cor dourada */
   ::selection {
     background-color: var(--gold-200);
     color: var(--neutral-800);
   }
 
+  /* Links base */
   a {
     color: inherit;
     text-decoration: none;
   }
 
+  /* Imagens responsivas */
   img {
     max-width: 100%;
     height: auto;
@@ -131,9 +146,16 @@
   }
 }
 
+
+/* ═══════════════════════════════════════════════════════
+   COMPONENT CLASSES (use com @apply ou direto no className)
+═══════════════════════════════════════════════════════ */
+
 @layer components {
+
   /* ─── Overline / Label pequeno ─── */
   .overline {
+    font-family: var(--font-body);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 3px;
@@ -184,6 +206,7 @@
 
   /* ─── Body text ─── */
   .text-body-lg {
+    font-family: var(--font-body);
     font-size: 20px;
     font-weight: 300;
     line-height: 1.7;
@@ -191,6 +214,7 @@
   }
 
   .text-body {
+    font-family: var(--font-body);
     font-size: 16px;
     font-weight: 400;
     line-height: 1.7;
@@ -198,6 +222,7 @@
   }
 
   .text-caption {
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 400;
     color: var(--text-tertiary);
@@ -210,6 +235,7 @@
     justify-content: center;
     gap: 10px;
     padding: 16px 40px;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -234,6 +260,7 @@
     justify-content: center;
     gap: 10px;
     padding: 15px 38px;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -259,6 +286,7 @@
     justify-content: center;
     gap: 10px;
     padding: 16px 40px;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -282,6 +310,7 @@
     justify-content: center;
     gap: 10px;
     padding: 14px 32px;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     color: var(--gold-500);
@@ -302,6 +331,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 1px;
@@ -330,6 +360,7 @@
   .input {
     width: 100%;
     padding: 14px 18px;
+    font-family: var(--font-body);
     font-size: 15px;
     color: var(--text-primary);
     background-color: #fff;
@@ -400,6 +431,26 @@
     background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
   }
 
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .divider-ornament .line {
+    flex: 1;
+    height: 1px;
+    background: var(--border-light);
+  }
+
+  .divider-ornament .diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--gold-400);
+    transform: rotate(45deg);
+  }
+
   /* ─── Seção com background marble ─── */
   .bg-marble {
     background:
@@ -416,9 +467,35 @@
   .bg-cream {
     background: linear-gradient(165deg, var(--cream-50) 0%, var(--cream-100) 40%, var(--neutral-100) 100%);
   }
+
+  /* ─── Gold glow (para detalhe decorativo) ─── */
+  .gold-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(168,131,58,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
 }
 
+
+/* ═══════════════════════════════════════════════════════
+   UTILITY CLASSES (extras pro Tailwind)
+═══════════════════════════════════════════════════════ */
+
 @layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
   .text-gold {
     color: var(--gold-500);
   }
@@ -439,7 +516,7 @@
     box-shadow: var(--shadow-gold);
   }
 
-  /* Animações nativas */
+  /* Animação de entrada suave */
   .animate-fade-up {
     animation: fadeInUp 0.6s var(--ease-out) both;
   }
